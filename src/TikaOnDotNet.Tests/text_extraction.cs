@@ -186,5 +186,15 @@ namespace TikaOnDotNet.Tests
 			textExtractionResult.Text.ShouldContain("Google");
 			textExtractionResult.Metadata["Uri"].ShouldEqual(url);
 		}
+
+        [Test]
+        public void should_extract_from_uri_with_encoding()
+        {
+            const string url = "http://career.ua.edu/downloads/handouts/Curriculum%20Vitae.pdf";
+            var textExtractionResult = _cut.Extract(new Uri(url));
+
+            textExtractionResult.Text.ShouldContain("Vitae");
+            textExtractionResult.Metadata["Uri"].ShouldEqual(url);
+        }
 	}
 }

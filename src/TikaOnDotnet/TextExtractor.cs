@@ -68,11 +68,11 @@ namespace TikaOnDotNet
 
 		public TextExtractionResult Extract(Uri uri)
 		{
-			var jUri = new java.net.URI(uri.ToString());
+            var jUri = new java.net.URI(Uri.EscapeUriString(uri.ToString()));
 			return Extract(metadata =>
 			{
 				var result = TikaInputStream.get(jUri, metadata);
-				metadata.add("Uri", uri.ToString());
+                metadata.add("Uri", Uri.EscapeUriString(uri.ToString()));
 				return result;
 			});
 		}
